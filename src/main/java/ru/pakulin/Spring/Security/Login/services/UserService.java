@@ -18,16 +18,17 @@ public class UserService {
         this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
 }
-    public Optional<User> findByName(String name){
-    return userRepository.findByUsername(name);
+    public Optional<User> findByUsername(String username){
+    return userRepository.findByUsername(username);
     }
 
     public List<User> findAll() {
     return userRepository.findAll();
     }
 
-    public void add(User user) {
+    public User add(User user) {
      user.setPassword(passwordEncoder.encode(user.getPassword()));
     userRepository.save(user);
+        return user;
     }
 }

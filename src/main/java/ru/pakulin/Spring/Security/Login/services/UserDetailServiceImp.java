@@ -4,15 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-
-public class CustomUserDetailService implements UserDetailsService {
+@Service
+public class UserDetailServiceImp implements UserDetailsService {
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        return userService.findByName(name)
-                .orElseThrow(()->new UsernameNotFoundException("User with name "+name+" not found"));
+        return userService.findByUsername(name)
+                .orElseThrow(() -> new UsernameNotFoundException("User with name " + name + " not found"));
     }
 }
