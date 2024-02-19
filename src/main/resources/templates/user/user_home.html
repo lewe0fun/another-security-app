@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Control Panel</title>
+    <title>User Control Panel</title>
 </head>
 <body>
 <h2>USER HOME!!!</h2>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+    </form>
 </body>
 </html>

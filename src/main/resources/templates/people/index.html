@@ -5,8 +5,20 @@
     <title>people</title>
 </head>
 <body>
-<div th:each="person : ${people}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()  + ', ' + person.getEmail()+ ', ' + person.getPassword+ ', ' + person.getRole()}">user</a>
-</div>
+<tr th:each="person : ${people}">
+    <td th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()  + ', ' + person.getEmail()+ ', ' + person.getPassword+ ', ' + person.getRole()}">user</td>
+</tr>
+<form th:action="@{/home}" method="get">
+
+    <table>
+        <tr data-th-each="user : ${users}">
+            <td data-th-text="${user.login}">...</td>
+            <td data-th-text="${user.name}">...</td>
+        </tr>
+    </table>
+
+
+    <input type="submit" value="home"/>
+</form>
 </body>
 </html>

@@ -5,11 +5,13 @@
     <title>Admin Control Panel</title>
 </head>
 <body>
-<h2>HOME of ADMIN!!!</h2>
+<h2>HOME Page</h2>
 
 <form th:action="@{/logout}" method="post">
 <input type="submit" value="Logout"/>
 </form>
-
+<form th:action="@{/people}" method="get">
+    <input type="submit" value="people"/>
+</form>
 </body>
 </html>

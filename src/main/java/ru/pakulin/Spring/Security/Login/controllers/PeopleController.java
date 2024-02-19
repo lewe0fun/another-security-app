@@ -37,9 +37,9 @@ public class PeopleController {
             return "people/new";
         }
         userService.add(user);
-        return "redirect:/index";
+        return "redirect:/";
     }
-    @GetMapping("/index")
+    @GetMapping("")
     public String index(Model model){
         model.addAttribute("people", userService.findAll());
         return "people/index";}

@@ -3,44 +3,49 @@ package ru.pakulin.Spring.Security.Login.configs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import ru.pakulin.Spring.Security.Login.services.CustomUserDetailService;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
-@Order(1)
-public class AdminSecurityConfig {
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@Order
+public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/").permitAll()
-                .requestMatchers("/admin/**", "/people/index").hasAnyAuthority("ADMIN")
-                .requestMatchers("/user/**", "/people/index").hasAnyAuthority("USER", "ADMIN")
-                .anyRequest()
-                .authenticated()
-
-        );
+    public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT).hasAuthority("ADMIN")
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAuthority("USER")
+                        .requestMatchers("/people/**").hasAnyAuthority("ADMIN","USER")
+                        .anyRequest()
+                        .authenticated()
+                );
         http.formLogin(login -> login
-                .loginPage("/admin/login")
+                .loginPage("/login")
                 .usernameParameter("name")
-                .loginProcessingUrl("/admin/login")
-                .defaultSuccessUrl("/admin/home")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/home")
                 .permitAll());
         http.logout(logout -> logout
-                .logoutUrl("/admin/logout")
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .permitAll());
-        http.httpBasic(withDefaults());
+        //http.httpBasic(withDefaults());
         return http.build();
     }
 
