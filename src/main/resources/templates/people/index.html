@@ -3,20 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>people</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <style type="text/css">
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+  </style>
 </head>
 <body>
-<tr th:each="person : ${people}">
-    <td th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()  + ', ' + person.getEmail()+ ', ' + person.getPassword+ ', ' + person.getRole()}">user</td>
-</tr>
+
+<h1>Accounts list</h1>
+<table style="color: yellow, border: 1px solid">
+    <tr>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>ROLE</th>
+        <th>PASSWORD</th>
+    </tr>
+    <tr data-th-each="user : ${users}">
+        <td data-th-text="${user.getUsername()}">...</td>
+        <td data-th-text="${user.getEmail()}">...</td>
+        <td data-th-text="${user.getRole()}">...</td>
+        <td data-th-text="${user.getPassword()}">...</td>
+    </tr>
+</table>
+
 <form th:action="@{/home}" method="get">
-
-    <table>
-        <tr data-th-each="user : ${users}">
-            <td data-th-text="${user.login}">...</td>
-            <td data-th-text="${user.name}">...</td>
-        </tr>
-    </table>
-
 
     <input type="submit" value="home"/>
 </form>

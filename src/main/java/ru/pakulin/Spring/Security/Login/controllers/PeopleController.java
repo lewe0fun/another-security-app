@@ -41,7 +41,7 @@ public class PeopleController {
     }
     @GetMapping("")
     public String index(Model model){
-        model.addAttribute("people", userService.findAll());
+        model.addAttribute("users", userService.findAll());
         return "people/index";}
 }
 
