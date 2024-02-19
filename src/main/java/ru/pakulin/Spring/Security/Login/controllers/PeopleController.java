@@ -1,5 +1,6 @@
 package ru.pakulin.Spring.Security.Login.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.pakulin.Spring.Security.Login.models.User;
 import ru.pakulin.Spring.Security.Login.services.UserService;
 
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/people")

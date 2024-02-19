@@ -19,7 +19,7 @@ public class UserService {
     this.passwordEncoder = passwordEncoder;
 }
     public Optional<User> findByName(String name){
-    return userRepository.findByName(name);
+    return userRepository.findByUsername(name);
     }
 
     public List<User> findAll() {
