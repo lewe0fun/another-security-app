@@ -3,11 +3,14 @@ package ru.pakulin.Spring.Security.Login.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.pakulin.Spring.Security.Login.models.AuthUser;
 import ru.pakulin.Spring.Security.Login.models.User;
 import ru.pakulin.Spring.Security.Login.repositories.UserRepository;
+
+
 
 @Service
 public class AuthService {
@@ -30,18 +33,19 @@ public class AuthService {
         user.setEmail(auth.getEmail());
         user.setPassword(passwordEncoder.encode(auth.getPassword()));
         user.setRole(auth.getRole());
-        user=userRepository.save(user);
+        user = userRepository.save(user);
         return new AuthUser(jwtService.generateToken(user));
     }
 
     public AuthUser authentication(User auth) {
+        String name = auth.getUsername();
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        auth.getUsername(),
+                        name,
                         auth.getPassword()
                 )
         );
-        User user = userRepository.findByUsername(auth.getUsername()).orElseThrow();
+        User user = userRepository.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("User with name " + name + " not found"));
         return new AuthUser(jwtService.generateToken(user));
     }
 }
