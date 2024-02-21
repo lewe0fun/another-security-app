@@ -35,11 +35,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        //.requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
-                        //.requestMatchers(HttpMethod.PUT).hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT).hasAuthority("ADMIN")
                         .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/user/**").hasAuthority("USER")
@@ -47,7 +47,7 @@ public class SecurityConfig {
                         .anyRequest()
                         .authenticated()
                 ).userDetailsService(userDetailServiceImp)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         http.formLogin(login -> login
                 .loginPage("/login")
@@ -59,7 +59,6 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .permitAll());
-        //http.httpBasic(withDefaults());
         return http.build();
     }
 
