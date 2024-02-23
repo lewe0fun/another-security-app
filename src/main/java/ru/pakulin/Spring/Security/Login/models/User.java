@@ -12,7 +12,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -34,6 +34,13 @@ public class User implements UserDetails {
     @JoinColumn(name = "books")
     @OneToMany
     private List<Book> books;
+
+    public User(String username, String email, String password, Role role) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

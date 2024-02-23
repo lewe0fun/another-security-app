@@ -1,15 +1,15 @@
 package ru.pakulin.Spring.Security.Login.api;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.pakulin.Spring.Security.Login.models.Book;
 import ru.pakulin.Spring.Security.Login.models.User;
 import ru.pakulin.Spring.Security.Login.services.BookService;
 import ru.pakulin.Spring.Security.Login.services.UserService;
-
 
 import java.util.List;
 
@@ -28,9 +28,9 @@ public class BookApiController {
     }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable @Parameter(description = "Book id", example = "1") int id) {
-        System.out.println(bookService.findById(id).getReader());
-        return bookService.findById(id);
+    public ResponseEntity<Book> getBookById(@PathVariable @Parameter(description = "Book id", example = "1") int id) {
+        return bookService.findById(id).map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping()

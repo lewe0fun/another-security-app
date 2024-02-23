@@ -9,16 +9,16 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "book")
-public class Book {
+public class Book implements IBook{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int book_id;
+    private Long book_id;
 
     @NotEmpty(message = "title name should not be empty")
     @Size(min = 2, max = 100, message = "The book title must be between 2 and 100 characters long")
@@ -37,4 +37,9 @@ public class Book {
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User reader;
+
+    @Override
+    public boolean isAvailable() {
+        return this.reader==null;
+    }
 }

@@ -9,6 +9,7 @@ import ru.pakulin.Spring.Security.Login.repositories.BookRepository;
 import ru.pakulin.Spring.Security.Login.models.Book;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -21,24 +22,27 @@ public class BookService {
     private UserService readerService;
 
     @Transactional
-    public Book update(int id, Book book) {
-        Book existingBook = findById(id);
-        existingBook.setTitle(book.getTitle());
-        existingBook.setAuthor(book.getAuthor());
-        return bookRepository.save(existingBook);
+    public Book update(long id, Book book) {
+        Optional<Book> existingBook = findById(id);
+        if (existingBook.isEmpty())throw new NoSuchElementException("book with id "+id+" not found");
+        existingBook.get().setTitle(book.getTitle());
+        existingBook.get().setAuthor(book.getAuthor());
+        return bookRepository.save(existingBook.get());
     }
 
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
-    public Book findById(int id) {
-        Optional<Book> book = bookRepository.findById(id);
-        return book.orElseThrow(() -> new RuntimeException("book not found"));
+    public Optional<Book> findById(long id) {
+        return bookRepository.findById(id);
     }
 
     public List<Book> findBooksByPerson(int id) {
         return bookRepository.findBooksByUser(id);
+    }
+    public Book findBookByTitle(String title){
+        return bookRepository.findByTitle(title);
     }
 
     @Transactional
@@ -47,22 +51,22 @@ public class BookService {
     }
 
     @Transactional
-    public void delete(int id) {
+    public void delete(long id) {
         bookRepository.deleteById(id);
     }
 
     @Transactional
-    public Book assign(int book_id, int readerId) {
-        Book existingBook = findById(book_id);
+    public Book assign(long bookId, long readerId) {
+        Book existingBook = findById(bookId).orElseThrow(()->new NoSuchElementException("Book with id " + bookId + " not found"));
         User reader = readerService.findById(readerId).orElseThrow(()-> new UsernameNotFoundException("User with id " + readerId + " not found"));
         existingBook.setReader(reader);
         return bookRepository.save(existingBook);
     }
 
     @Transactional
-    public Book release(int id) {
-        Book existingBook = findById(id);
-        existingBook.setReader(null);
-        return bookRepository.save(existingBook);
+    public Book release(long id) {
+        Optional<Book> existingBook = findById(id);
+        existingBook.orElseThrow(()->new UsernameNotFoundException("user with id "+id+" not found")).setReader(null);
+        return bookRepository.save(existingBook.get());
     }
 }
