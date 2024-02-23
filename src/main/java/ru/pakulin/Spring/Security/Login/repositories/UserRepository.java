@@ -3,7 +3,7 @@ package ru.pakulin.Spring.Security.Login.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.pakulin.Spring.Security.Login.models.User;
+import ru.pakulin.Spring.Security.Login.domain.model.User;
 
 import java.util.List;
 import java.util.Optional;

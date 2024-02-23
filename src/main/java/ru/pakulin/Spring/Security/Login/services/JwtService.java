@@ -7,7 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import ru.pakulin.Spring.Security.Login.models.User;
+import ru.pakulin.Spring.Security.Login.domain.model.User;
 
 import java.security.Key;
 import java.util.Date;

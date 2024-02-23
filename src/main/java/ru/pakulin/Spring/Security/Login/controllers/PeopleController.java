@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.pakulin.Spring.Security.Login.models.User;
+import ru.pakulin.Spring.Security.Login.domain.model.User;
 import ru.pakulin.Spring.Security.Login.services.UserService;
 
 

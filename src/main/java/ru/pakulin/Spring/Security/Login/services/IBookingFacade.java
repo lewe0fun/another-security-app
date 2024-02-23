@@ -1,8 +1,6 @@
 package ru.pakulin.Spring.Security.Login.services;
 
-import ru.pakulin.Spring.Security.Login.models.UserCard;
-
-import java.util.Date;
+import ru.pakulin.Spring.Security.Login.domain.model.UserCard;
 
 public interface IBookingFacade {
 

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.pakulin.Spring.Security.Login.models.Book;
-import ru.pakulin.Spring.Security.Login.models.User;
+import ru.pakulin.Spring.Security.Login.domain.model.Book;
+import ru.pakulin.Spring.Security.Login.domain.model.User;
 import ru.pakulin.Spring.Security.Login.services.BookService;
 import ru.pakulin.Spring.Security.Login.services.UserService;
 

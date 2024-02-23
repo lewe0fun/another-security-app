@@ -1,4 +1,4 @@
-package ru.pakulin.Spring.Security.Login.models;
+package ru.pakulin.Spring.Security.Login.domain.model;
 
 
 import jakarta.persistence.*;
@@ -25,7 +25,7 @@ public class Book implements IBook{
     @Column(name = "title")
     private String title;
 
-    @NotEmpty(message = "title name should not be empty")
+    @NotEmpty(message = "Author name should not be empty")
     @Size(min = 2, max = 100, message = "Author name must be between 2 and 100 characters long")
     @Column(name = "author")
     private String author;

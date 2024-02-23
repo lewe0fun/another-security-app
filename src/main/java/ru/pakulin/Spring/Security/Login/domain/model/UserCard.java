@@ -1,4 +1,4 @@
-package ru.pakulin.Spring.Security.Login.models;
+package ru.pakulin.Spring.Security.Login.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,6 +26,9 @@ public class UserCard {
     private Long bookId;
 
     @Column
+    private UserCardType userCardType;
+
+    @Column
     private LocalDate startTime;
 
     @Column
@@ -42,6 +45,10 @@ public class UserCard {
 
         public UserCardBuilder bookId(long id) {
             userCard.setBookId(id);
+            return this;
+        }
+        public UserCardBuilder type(UserCardType type) {
+            userCard.setUserCardType(type);
             return this;
         }
 

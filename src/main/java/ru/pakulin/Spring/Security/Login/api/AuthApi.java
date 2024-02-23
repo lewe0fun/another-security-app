@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.pakulin.Spring.Security.Login.models.AuthUser;
-import ru.pakulin.Spring.Security.Login.models.User;
+import ru.pakulin.Spring.Security.Login.domain.model.AuthUser;
+import ru.pakulin.Spring.Security.Login.domain.model.User;
 import ru.pakulin.Spring.Security.Login.services.AuthService;
 
 @RestController

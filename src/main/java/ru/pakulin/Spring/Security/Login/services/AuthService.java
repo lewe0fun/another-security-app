@@ -6,8 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.pakulin.Spring.Security.Login.models.AuthUser;
-import ru.pakulin.Spring.Security.Login.models.User;
+import ru.pakulin.Spring.Security.Login.domain.model.AuthUser;
+import ru.pakulin.Spring.Security.Login.domain.model.User;
 import ru.pakulin.Spring.Security.Login.repositories.UserRepository;
 
 

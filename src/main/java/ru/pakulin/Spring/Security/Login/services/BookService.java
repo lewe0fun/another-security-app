@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.pakulin.Spring.Security.Login.models.User;
+import ru.pakulin.Spring.Security.Login.domain.model.User;
 import ru.pakulin.Spring.Security.Login.repositories.BookRepository;
-import ru.pakulin.Spring.Security.Login.models.Book;
+import ru.pakulin.Spring.Security.Login.domain.model.Book;
 
 import java.util.List;
 import java.util.NoSuchElementException;

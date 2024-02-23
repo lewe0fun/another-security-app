@@ -1,4 +1,4 @@
-package ru.pakulin.Spring.Security.Login.models;
+package ru.pakulin.Spring.Security.Login.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
